@@ -1,189 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>N.A. Osagani Navajana Perera - Portfolio</title>
-  <link rel="icon" type="image/x-icon" href="Osagani Perera.jpg">
-  <link rel="stylesheet" href="portfolio.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osagani Perera - Computer Science Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a:hover {
+            background: rgba(0, 255, 65, 0.2);
+            color: #00ff41;
+            transform: translateY(-2px);
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        nav a:hover::before {
+            left: 100%;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 100px 50px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 255, 65, 0.1), transparent);
+        }
+
+        .profile-pic {
+    width: 300px; /* Increased from 200px */
+    height: 300px; /* Increased from 200px */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #00ff41;
+    margin: 0 auto 30px; /* You can adjust this if needed */
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+}
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ff41, #ffffff, #00ff41);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: #00ff41;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-right: 2px solid #00ff41;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff41; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            color: #000;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #00ff41;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            border-radius: 2px;
+        }
+
+        .about, .skills, .education, .achievements {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #00ff41;
+        }
+
+        .skill-item h3 {
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+
+        .education-item, .achievement-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #00ff41;
+        }
+
+        .education-item h3, .achievement-item h3 {
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+
+        .education-item p, .achievement-item p {
+            margin-bottom: 10px;
+        }
+
+        .contact {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .contact-form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ff41;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 65, 0.2);
+            color: #00ff41;
+            text-decoration: none;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #00ff41;
+            color: #000;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            section {
+                padding: 80px 20px 50px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header class="header">
-  <a href="#" class="logo"><img src="Osagani Perera.jpg" alt="logo" class="logo"></a>
-  <i class='bx bx-menu' id="menu-icon"></i>
-  <div class="navbar">
-    <li><a href="#home" class="active">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </div>
-</header>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-<section class="home" id="home">
-  <div class="home-content">
-    <h3>Hello I'm</h3>
-    <h1> Osagani  Perera</h1>
-    <h3>I'm a <span class="primary-color">Computer Science Undergraduate</span></h3>
-    <p>Dedicated and passionate about technology, seeking to expand my knowledge and experience in ICT to foster a successful career in IT.</p>
-    <div class="social-media">
-      <a href="https://www.facebook.com/"><i class='bx bxl-facebook'></i></a>
-      <a href="https://www.linkedin.com/in/osagani-perera"><i class='bx bxl-linkedin'></i></a>
-      <a href="https://github.com/"><i class='bx bxl-github'></i></a>
-    </div>
-    <a href="N.A.O.N.Perera-CV(1)ul.pdf" class="btn" download>Download CV</a>
-  </div>
-  <div class="home-img">
-    <img src="ME.jpg" alt="Profile-pic">
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="about-img">
-    <img src="Osagani.jpg" alt="about-img">
-  </div>
-  <div class="about-content">
-    <h2 class="heading">About <span>Me</span></h2>
-    <h3>Computer Science Undergraduate</h3>
-    <p>I am a student at NSBM Green University with a focus on programming, web design, and critical thinking. I speak Sinhala and English fluently, and I thrive in collaborative, creative, and high-pressure environments.</p>
-    <ul>
-      <li><strong>Skills:</strong> Python, Java, SQL, C, C#, HTML/CSS, Adobe Photoshop</li>
-      <li><strong>Soft Skills:</strong> Communication, Teamwork, Problem Solving, Creativity, Leadership</li>
-      <li><strong>Languages:</strong> Sinhala, English</li>
-    </ul>
-    <p>I am actively involved in university clubs and leadership roles, including Vice Treasurer at ACDS, Vice Chairperson of Figmate Workshop, and more.</p>
-    <a href="#education" class="btn">Read More</a>
-  </div>
-</section>
-
-<section class="education" id="education">
-  <h2 class="heading">My <span>Journey</span></h2>
-  <div class="education-row">
-    <div class="education-column">
-      <h3 class="title">Education</h3>
-      <div class="education-box">
-        <div class="education-content">
-          <div class="content">
-            <div class="year"><i class='bx bxs-calendar'></i>2023-Present</div>
-            <h3>BSc (Hons) in Computer Science</h3>
-            <p>Currently pursuing at NSBM Green University (UGC recognized).</p>
-          </div>
-          <div class="year"><i class='bx bxs-calendar'></i>2023-Present</div>
-            <h3><div class="year"><i class='bx bxs-calendar'></i>2023-Present</div>
-            <h3>Diploma in ICT</h3>
-            <p>Successfully completed Diploma in ICT at Esoft Metro Campus</p>
-          </div>
+    <section id="home" class="hero">
+        <div class="container">
+            <img src="Osagani.jpg" alt="Osagani Perera" class="profile-pic">
+            <h1>Osagani Perera</h1>
+            <h2>Computer Science Undergraduate</h2>
+            <p>Passionate about technology, innovation, and creating solutions that make a difference. Currently pursuing BSc Honours in Computer Science at NSBM Green University.</p>
+            <a href="#contact" class="cta-button">Get In Touch</a>
         </div>
-        <div class="education-content">
-          <div class="content">
-            <div class="year"><i class='bx bxs-calendar'></i>2021-2022</div>
-            <h3>G.C.E. Advanced Level</h3>
-            <p>St. Joseph’s College, Colombo 10 (Negombo Branch) - Maths Stream</p>
-            <ul>
-              <li>Combined Maths - S</li>
-              <li>Physics - S</li>
-              <li>Chemistry - S</li>
-              <li>General English - A</li>
-            </ul>
-          </div>
-        </div>
-        <div class="education-content">
-          <div class="content">
-            <div class="year"><i class='bx bxs-calendar'></i>2016</div>
-            <h3>G.C.E. Ordinary Level</h3>
-            <p>St. Joseph’s College - English Medium</p>
-            <ul>
-              <li>6 A’s (Maths, ICT, English, Religion, History, Sinhala)</li>
-              <li>2 B’s (Business Studies, Literature)</li>
-              <li>1 C (Science)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="education-column">
-      <h3 class="title">Experience & Achievements</h3>
-      <div class="education-box">
-        <div class="education-content">
-          <div class="content">
-            <div class="year"><i class='bx bxs-calendar'></i>2024</div>
-            <h3>Certifications</h3>
-            <p>Certificate in IT (Telecom Center), Responsive Web Design (FreeCodeCamp), Microsoft AI & GitHub Challenges.</p>
-          </div>
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about">
+                <p>I am a dedicated Computer Science undergraduate with a strong passion for software development, artificial intelligence, and problem-solving. My journey in technology began at a young age, and I've been constantly expanding my knowledge and skills ever since.</p>
+                <p>I believe in the power of technology to transform lives and am committed to using my skills to create meaningful solutions.</p>
+            </div>
         </div>
-        <div class="education-content">
-          <div class="content">
-            <div class="year"><i class='bx bxs-calendar'></i>2012-2024</div>
-            <h3>Academic Awards & Exams</h3>
-            <p>Multiple school awards in Religion, IT, Tamil, Essay Writing, and Mathematics. Distinctions in Catechetical exams (2012-2018). Cambridge Flyers certified.</p>
-          </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills">
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <h3>Programming Languages</h3>
+                        <p>Python, Java, JavaScript, C++, C#</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Web Development</h3>
+                        <p>HTML5, CSS3, JavaScript, React, Node.js, Express</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Database</h3>
+                        <p>MySQL, MongoDB, Firebase</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Data Visualization</h3>
+                        <p>PowerBI,Tableau</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>AI/ML</h3>
+                        <p>TensorFlow, PyTorch, Scikit-learn</p>
+                    </div>
+                    <div class="skill-item">
+                        <h3>Other</h3>
+                        <p>Git, Docker, AWS, Agile Methodologies</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="education-content">
-          <div class="content">
-            <div class="year"><i class='bx bxs-calendar'></i>2023-Present</div>
-            <h3>Leadership & Volunteering</h3>
-            <p>Roles in IEEE, ACDS, DataDive, FOSS Community, and more. Actively involved in planning, finance, and logistics at university events.</p>
-          </div>
-        <div class="education-content">
-          <div class="content">
-            <div class="year"><i class='bx bxs-calendar'></i>2023-Present</div>
-            <h3>Projects</h3>
-            <p>Developed  a website for Tourists</p>
-            <br>
-            <p>Developed  a Student Learning Management using Java Servlets and JSP</p>
-          </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education">
+                <div class="education-item">
+                    <h3>BSc (Hons) in Computer Science</h3>
+                    <p>NSBM Green University</p>
+                    <p>2022 - Present</p>
+                    <p>IEEE Member at NSBM Green University Student Branch</p>
+                </div>
+                <div class="education-item">
+                    <h3>G.C.E Advanced Level</h3>
+                    <p>Physical Science Stream</p>
+                    <p>St.Joseph's College,Colombo 10,Negombo Branch</p>
+                    <p>2019 - 2022</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="contact" id="contact">
-  <h2 class="heading">Contact <span>Me</span></h2>
-  <form name="contact-form" action="">
-    <div class="input-box">
-      <div class="input-field">
-        <input type="text" name="full-name" placeholder="Full Name" required>
-        <span class="focus"></span>
-      </div>
-      <div class="input-field">
-        <input type="email" name="email" placeholder="Email" required>
-        <span class="focus"></span>
-      </div>
-    </div>
-    <div class="input-box">
-      <div class="input-field">
-        <input type="tel" name="mobile-number" placeholder="Mobile Number" required>
-        <span class="focus"></span>
-      </div>
-      <div class="input-field">
-        <input type="text" name="subject" placeholder="Subject" required>
-        <span class="focus"></span>
-      </div>
-    </div>
-    <div class="textarea-field">
-      <textarea cols="30" rows="10" name="message" placeholder="Your Message" required></textarea>
-      <span class="focus"></span>
-    </div>
-    <div id="status-message" class="status-message"></div>
-    <div class="btn-box btns">
-      <button type="submit" class="btn">Submit</button>
-    </div>
-  </form>
-</section>
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title">Achievements</h2>
+            <div class="achievements">
+                <div class="achievement-item">
+                    <h3>Certificate Course on Information Technology</h3>
+                    <p>Telecom Training Center Welisara- 2023</p>
+                    <p>PowerBI,Python,Adobe Photoshop,mysql</p>
+                </div>
+                <div class="achievement-item">
+                    <h3>Diploma in ICT</h3>
+                    <p>Esoft Metro Campus-2023</p>
+                    <p>Web Development,C#,Python</p>
+                </div>
+                <div class="achievement-item">
+                    <h3>Microsoft Student Learn</h3>
+                    <p>Successfully Completed Master AI Azure Fundamentals,Github copilot challenge, Azure learning journey challenge</p>
+                </div>
+                 <div class="achievement-item">
+                    <h3>Won Highest Grade Award for ICT,Mathematics</h3>
+                    <p>St.Joseph's College Colombo 10,Negombo,Branch-2016</p>
+                 </div>
+            </div>
+        </div>
+    </section>
 
-<footer class="footer">
-  <div class="footer-text">
-    <p>&copy; 2025 by N.A. Osagani Navajana Perera | All Rights Reserved.</p>
-  </div>
-  <div class="footer-iconTop">
-    <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
-  </div>
-</footer>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>233/A, Ravi Sewana, Batagama North, Ja-Ela</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>+94 714711854</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>osaganiperera123@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🔗</div>
+                        <div>LinkedIn: <a href="https://linkedin.com/in/osagani-perera" style="color:#00ff41;" target="_blank">osagani-perera</a></div>
+                    </div>
+                </div>
 
-<script src="JS/script.js"></script>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://linkedin.com/in/osagani-perera" target="_blank">in</a>
+            <a href="mailto:osaganiperera123@gmail.com">📧</a>
+        </div>
+        <p>© 2025 Osagani Perera. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
